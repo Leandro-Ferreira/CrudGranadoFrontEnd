@@ -1,0 +1,110 @@
+<div class="container-fluid">
+<div class="row d-flex justify-content-center align-items-center">
+<div class="col-md-8 mt-5">
+<p-toast></p-toast>
+
+<div class="alert alert-info" *ngIf="naoTemDadosParaExibicao">
+    <p class="text-center"> Sem dados para exibição.</p>
+</div>
+
+<div class="card" *ngIf="temDadosParaExibir">
+    <p-table #dt [value]="pessoas" [rows]="5" 
+                 [paginator]="true" styleClass="p-datatable-gridlines" [tableStyle]="{'min-width': '75rem'}" 
+                 [showCurrentPageReport]="true" [globalFilterFields]="['id','nome','cpf','telefone','email']">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input #txt pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')" placeholder="Pesquisar..." />
+                </span>
+            </div>
+        </ng-template> 
+
+        <ng-template pTemplate="header">
+            <tr class="text-center">
+                <th>Id</th>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Ações</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-pessoa>
+            <tr class="text-center">
+                <td>{{pessoa.id}}</td>
+                <td>{{pessoa.nome}}</td>
+                <td>{{pessoa.cpf}}</td>
+                <td>{{pessoa.email}}</td>
+                <td>{{pessoa.telefone}}</td>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success ml-2" (click)="editar(pessoa)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning ml-2" (click)="excluir(pessoa)"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                Existe um total de {{pessoas ? pessoas.length : 0 }} pessoas.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-dialog [(visible)]="pessoaDialog" [style]="{width: '450px'}" header="Editar" (onHide)="fecharDialogo()" [modal]="true" styleClass="p-fluid">
+    
+    <ng-template pTemplate="content">
+        <div class="field">
+            <label for="name"><b>Nome:</b></label>
+            <input type="hidden" pInputText id="id" [(ngModel)]="pessoa.id"/>
+            <input type="text" class="form-control" pInputText id="nome" [(ngModel)]="pessoa.nome" required  />
+            <small class="p-error" *ngIf="submitted && !pessoa.nome">O nome é obrigatório!</small>
+        </div>
+        <div class="field mt-2">
+            <label for="cpf"><b>CPF:</b></label>
+            <input type="text" pInputText class="form-control" id="cpf" [(ngModel)]="pessoa.cpf" required  />
+            <small class="p-error" *ngIf="submitted && !pessoa.cpf">O cpf é obrigatório!</small>
+        </div>
+
+        <div class="field mt-2">
+            <label for="email"><b>Email:</b></label>
+            <input type="text" pInputText id="email" class="form-control" [(ngModel)]="pessoa.email" required />
+            <small class="p-error" *ngIf="submitted && !pessoa.email">O email é obrigatório!</small>
+        </div>
+
+        <div class="field mt-2">
+            <label for="telefone"><b>Telefone:</b></label>
+            <input type="text" pInputText id="telefone" class="form-control" [(ngModel)]="pessoa.telefone" required />
+            <small class="p-error" *ngIf="submitted && !pessoa.telefone">O telefone é obrigatório!</small>
+        </div>
+        
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="fecharDialogo()"></button>
+        <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button-text" (click)="salvarEdicao(pessoa)"></button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog #cd [style]="{width: '450px'}">
+    <ng-template pTemplate="header">
+        <h5>Exclusão</h5>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button type="button" pButton 
+            icon="pi pi-times" label="Cancelar"
+            (click)="cd.reject()">
+        </button>
+       
+        <button type="button" pButton 
+            icon="pi pi-check" label="Ok"
+            (click)="cd.accept()">
+        </button>
+    </ng-template>
+
+</p-confirmDialog>
+</div>
+</div>
+
+</div>
+

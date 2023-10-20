@@ -1,0 +1,47 @@
+<p-toast></p-toast>
+<div class="container-fluid">
+    <div class="row  d-flex justify-content-center align-items-center">
+       <div class="col-md-6 mt-5">
+         <div class="card">
+          <h5 class="card-header text-white" style="background-color: rgb(2, 90, 68)">Cadastro</h5>
+           <div class="card-body">
+               <form [formGroup]="pessoaForm" (ngSubmit)="salvar()" novalidate>
+                   <div class="mb-3 mt-3">
+                     <label for="nome">Nome:</label>
+                     <input type="text" class="form-control" id="nome" placeholder="Ex: Bill Gates" formControlName="nome" required>
+                      <span class="text-danger"
+                                *ngIf="(nome?.touched || submitted) && nome?.errors?.['required']">
+                                    Nome inválido!
+                      </span>
+                   </div>
+                   <div class="mb-3">
+                     <label for="cpf">CPF:</label>
+                     <input type="text" class="form-control" id="cpf" placeholder="Ex: 999.999.999-99" formControlName="cpf" required>
+                     <span class="text-danger"
+                                *ngIf="(cpf?.touched || submitted) && cpf?.errors?.['required']">
+                                    CPF inválido!
+                      </span>
+                   </div>
+                   <div class="mb-3">
+                      <label for="telefone">Telefone:</label>
+                      <input type="tel" class="form-control" id="telefone" placeholder="Ex: (21)9999-99999" formControlName="telefone" required>
+                      <span class="text-danger"
+                                *ngIf="(telefone?.touched || submitted) && telefone?.errors?.['required']">
+                                    Telefone inválido!
+                      </span>
+                   </div>
+                   <div class="mb-3">
+                       <label for="email">Email:</label>
+                       <input type="email" class="form-control" id="email" placeholder="Ex: seuemail@gmail.com" formControlName="email" required>
+                       <span class="text-danger"
+                                *ngIf="(email?.touched || submitted) && email?.errors?.['required']">
+                                    Email inválido!
+                      </span>
+                    </div>
+                   <button type="submit" class="btn btn-primary">Gravar</button>
+             </form>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
