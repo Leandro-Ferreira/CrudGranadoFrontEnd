@@ -26,6 +26,6 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
-## Caso apareça a mensagem de erro Error: Could not find the '@angular-devkit/build-angular:dev-server' builder's node package ao executar o ng serve, siga esse passo
+## Caso apareça a mensagem de erro Error: "Could not find the '@angular-devkit/build-angular:dev-server' builder's node package" ao executar o ng serve, siga esse passo
 
 Execute o comando npm install --save-dev @angular-devkit/build-angular e rode o ng serve novamente
