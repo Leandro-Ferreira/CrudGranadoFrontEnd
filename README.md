@@ -25,3 +25,7 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Caso encontre erro ao executar ng serve siga esse passo 
+
+Execute o comando npm install --save-dev @angular-devkit/build-angular e rode o ng serve novamente
